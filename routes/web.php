@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -63,3 +64,7 @@ Route::redirect('/beranda', '/');
 Route::fallback(function () {
     return response('Halaman tidak ditemukan (kustom).', 404);
 });
+
+Route::get('/produk', [ProductController::class, 'index']) -> name('produk.index');
+Route::get('/produk/{id}', [ProductController::class, 'show']) -> name('produk.show');
+Route::resource('produk', ProductController::class);
